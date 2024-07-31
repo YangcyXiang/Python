@@ -65,69 +65,70 @@ def median_filtering(image):
 
     return image_result
 
+if __name__ == '__main__':
+    # read image
+    # img = cv2.imread("data/timoxi_640x512.jpg", cv2.IMREAD_UNCHANGED)
 
-# read image
-# img = cv2.imread("data/timoxi_640x512.jpg", cv2.IMREAD_UNCHANGED)
+    # img = cv2.imread("data/timoxi_640x512.jpg", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    # img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/airplane256.png", cv2.IMREAD_GRAYSCALE) # change to gra
+    # img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/barbara512.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    # img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/boat512.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
 
-# img = cv2.imread("data/timoxi_640x512.jpg", cv2.IMREAD_GRAYSCALE) # change to grayscale
-# img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/airplane256.png", cv2.IMREAD_GRAYSCALE) # change to gra
-# img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/barbara512.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
-# img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/boat512.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    # img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/Cameraman256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    # img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/couple512.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    # img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/fishstar256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    # img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/house256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    # img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/Lena512.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    # img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/man512.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    # img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/monarch256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    # img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/parrot256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    # img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/peppers256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    img = cv2.imread("./data/loki256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    #
+    # yscale
+    # img = cv2.imread("data/timoxi_320x256.jpg", cv2.IMREAD_GRAYSCALE) # change to grayscale
+    img_noise=img
 
-# img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/Cameraman256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
-# img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/couple512.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
-# img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/fishstar256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
-# img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/house256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
-# img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/Lena512.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
-# img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/man512.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
-# img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/monarch256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
-# img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/parrot256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
-img = cv2.imread("D:/Workspace/datasets/onedrive_omit/Set12/peppers256.png", cv2.IMREAD_GRAYSCALE) # change to grayscale
-#
-# yscale
-# img = cv2.imread("data/timoxi_320x256.jpg", cv2.IMREAD_GRAYSCALE) # change to grayscale
-img_noise=img
- 
-cv2.imshow("src", img)
- 
-# rows, cols, chn = img_noise.shape
-rows, cols = img_noise.shape
+    cv2.imshow("src", img)
 
- 
-# add noise
-for row in range(rows):
-    for col in range(cols):
-        if np.random.random() > 0.975:
-            img_noise[row, col] = 255
-        elif np.random.random() < 0.025:
-            img_noise[row, col] = 0
-
-# for i in range(5000):
-#     x = np.random.randint(0, rows)
-#     y = np.random.randint(0, cols)
-#     # img_noise[x, y, :] = 255
-#     img_noise[x, y] = 255
-# for i in range(cols):
-#     if np.random.random() > 0.9:
-#         img_noise[:, i] = 255
+    # rows, cols, chn = img_noise.shape
+    rows, cols = img_noise.shape
 
 
-cv2.imshow("noise", img_noise)
- 
-# median filtering, kernel size can be changed
-# result = cv2.medianBlur(img_noise, 3)
-result = median_filtering(img_noise)
+    # add noise
+    for row in range(rows):
+        for col in range(cols):
+            if np.random.random() > 0.975:
+                img_noise[row, col] = 255
+            elif np.random.random() < 0.025:
+                img_noise[row, col] = 0
 
-cv2.imshow("median filtering", result)
+    # for i in range(5000):
+    #     x = np.random.randint(0, rows)
+    #     y = np.random.randint(0, cols)
+    #     # img_noise[x, y, :] = 255
+    #     img_noise[x, y] = 255
+    # for i in range(cols):
+    #     if np.random.random() > 0.9:
+    #         img_noise[:, i] = 255
 
-# wait to show
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
-# save noised image
+    cv2.imshow("noise", img_noise)
 
-# cv2.imwrite("data/timoxi_640x512_grayscale_noise.jpg", img_noise)
-# cv2.imwrite("data/timoxi_640x512_grayscale_filtering.jpg", result)
+    # median filtering, kernel size can be changed
+    # result = cv2.medianBlur(img_noise, 3)
+    result = median_filtering(img_noise)
 
-# cv2.imwrite("data/timoxi_320x256_grayscale_noise.jpg", img_noise)
-# cv2.imwrite("data/timoxi_320x256_grayscale_filtering.jpg", result)
+    cv2.imshow("median filtering", result)
+
+    # wait to show
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+    # save noised image
+
+    # cv2.imwrite("data/timoxi_640x512_grayscale_noise.jpg", img_noise)
+    # cv2.imwrite("data/timoxi_640x512_grayscale_filtering.jpg", result)
+
+    # cv2.imwrite("data/timoxi_320x256_grayscale_noise.jpg", img_noise)
+    # cv2.imwrite("data/timoxi_320x256_grayscale_filtering.jpg", result)
