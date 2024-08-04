@@ -92,6 +92,11 @@ def gain_corner_plot(csv_file_name, img_file_name):
 
 
 if __name__ == '__main__':
-    gain_corner_plot(csv_file_name='./data/ROIC256U30_2023AUT_CTIA_AMP_V2_sim_gain_corner.csv',
-                     img_file_name='./img/ROIC256U30_2023AUT_CTIA_AMP_V2_sim_gain_corner.png'
+    # # CITA amp
+    # gain_corner_plot(csv_file_name='./data/ROIC512U30_2023AUT_CTIA_AMP_V2_sim_gain_corner.csv',
+    #                  img_file_name='img/ROIC512U30_2023AUT_CTIA_AMP_V2_sim_gain_corner.png'
+    #                  )
+    # COLUMN amp
+    gain_corner_plot(csv_file_name='./data/ROIC512U30_2023AUT_COLUMN_AMP_V2_sim_gain_corner.csv',
+                     img_file_name='img/ROIC512U30_2023AUT_COLUMN_AMP_V2_sim_gain_corner.png'
                      )
