@@ -1,3 +1,4 @@
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib import font_manager  # Chinese character
 from matplotlib.ticker import EngFormatter  # engineering_formatter
@@ -5,8 +6,22 @@ from matplotlib.ticker import FixedLocator, LogLocator, MultipleLocator, MaxNLoc
 import numpy as np
 import csv
 
-font_SongTi = font_manager.FontProperties(fname="C:/Windows/Fonts/simsun.ttc")
+from matplotlib.backends.backend_pgf import FigureCanvasPgf
+matplotlib.backend_bases.register_backend('pdf', FigureCanvasPgf)
 
+font_path = r"C:/Windows/Fonts/simsun.ttc"  # Your font path goes here
+font_manager.fontManager.addfont(font_path)
+prop = font_manager.FontProperties(fname=font_path)
+
+config = {
+    "font.family": 'serif',
+    "font.serif": prop.get_name(),
+    # "font.size": 14,  # 五号，10.5磅
+    # "axes.unicode_minus": False,
+    # "text.usetex": True,
+    # "mathtext.fontset": "stix",  # 设置 LaTeX 字体，stix 近似于 Times 字体
+}
+plt.rcParams.update(config)
 
 def phase_corner_plot(csv_file_name, img_file_name):
     # Get data from .csv file
@@ -72,14 +87,14 @@ def phase_corner_plot(csv_file_name, img_file_name):
              )
 
     # Add labels and title
-    ax.set_xlabel('频率 (Hz)', fontproperties=font_SongTi)
-    ax.set_ylabel('相位 (°)', fontproperties=font_SongTi)
+    ax.set_xlabel(r'频率 ($Hz$)')
+    ax.set_ylabel(r'相位 (\textdegree)')
     # ax.set_title('Scatter Plot of Data')
     plt.grid(visible=True, linestyle='--')
     ax.legend()
 
     # save image before show
-    plt.savefig(img_file_name, format='png', dpi=300)
+    plt.savefig(img_file_name, format='pdf', dpi=300)
 
     # Show the plot
     plt.show()
@@ -88,13 +103,13 @@ def phase_corner_plot(csv_file_name, img_file_name):
 if __name__ == '__main__':
     # # CITA amp
     # phase_corner_plot(csv_file_name='./data/ROIC512U30_2023AUT_CTIA_AMP_V2_sim_phase_corner.csv',
-    #                   img_file_name='img/ROIC512U30_2023AUT_CTIA_AMP_V2_sim_phase_corner.png'
+    #                   img_file_name='./img/ROIC512U30_2023AUT_CTIA_AMP_V2_sim_phase_corner.pdf'
     #                   )
     # # COLUMN amp
     # phase_corner_plot(csv_file_name='./data/ROIC512U30_2023AUT_COLUMN_AMP_V2_sim_phase_corner.csv',
-    #                   img_file_name='img/ROIC512U30_2023AUT_COLUMN_AMP_V2_sim_phase_corner.png'
+    #                   img_file_name='./img/ROIC512U30_2023AUT_COLUMN_AMP_V2_sim_phase_corner.pdf'
     #                   )
     # TERMINAL amp
     phase_corner_plot(csv_file_name='./data/ROIC512U30_2023AUT_TERMINAL_AMP_V2_sim_phase_corner.csv',
-                      img_file_name='img/ROIC512U30_2023AUT_TERMINAL_AMP_V2_sim_phase_corner.png'
+                      img_file_name='./img/ROIC512U30_2023AUT_TERMINAL_AMP_V2_sim_phase_corner.pdf'
                       )

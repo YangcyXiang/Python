@@ -23,31 +23,31 @@ config = {
 }
 plt.rcParams.update(config)
 
-def gain_corner_plot(csv_file_name, img_file_name):
+def noise_plot(csv_file_name, img_file_name):
     # Get data from .csv file
-    gain_x_tt = []
-    gain_y_tt = []
-    gain_x_ss = []
-    gain_y_ss = []
-    gain_x_ff = []
-    gain_y_ff = []
+    noise_x_tt = []
+    noise_y_tt = []
+    # gain_x_ss = []
+    # gain_y_ss = []
+    # gain_x_ff = []
+    # gain_y_ff = []
 
     # Load the data
     with open(csv_file_name, 'r') as csvfile:
         lines = csv.reader(csvfile, delimiter=',')
         for row in lines:
-            gain_x_tt.append(row[0])  # IT'S STRING !!!
-            gain_y_tt.append(row[1])
-            gain_x_ss.append(row[2])
-            gain_y_ss.append(row[3])
-            gain_x_ff.append(row[4])
-            gain_y_ff.append(row[5])
+            noise_x_tt.append(row[0])  # IT'S STRING !!!
+            noise_y_tt.append(row[1])
+            # gain_x_ss.append(row[2])
+            # gain_y_ss.append(row[3])
+            # gain_x_ff.append(row[4])
+            # gain_y_ff.append(row[5])
 
     fig, ax = plt.subplots()
 
     # set x axis and y axis
     ax.set_xscale('log')
-    ax.xaxis.set_major_locator(FixedLocator([0, 1, 10, 100, 1000, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9]))
+    ax.xaxis.set_major_locator(FixedLocator([0, 1e-2, 1e-1, 1, 10, 100, 1000, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9]))
     ax.xaxis.set_major_formatter(EngFormatter(places=0))
     ax.yaxis.set_major_locator(FixedLocator(np.arange(-120, 90, 10)))
 
@@ -58,7 +58,7 @@ def gain_corner_plot(csv_file_name, img_file_name):
     # #ff7f00 orange
     # #a668b0 purple
 
-    plt.plot([float(i) for i in gain_x_tt[2:-1]], [float(i) for i in gain_y_tt[2:-1]],
+    plt.plot([float(i) for i in noise_x_tt[2:-1]], [float(i) for i in noise_y_tt[2:-1]],
              's-',  # fmt = '[marker][line][color]'
              markersize=5,
              color='#377eb8',
@@ -68,33 +68,33 @@ def gain_corner_plot(csv_file_name, img_file_name):
              # markeredgecolor='gray',
              # markeredgewidth=2
              )
-    # SS
-    plt.plot([float(i) for i in gain_x_ss[2:-1]], [float(i) for i in gain_y_ss[2:-1]],
-             'o-',  # fmt = '[marker][line][color]'
-             markersize=5,
-             color='#4daf4a',
-             label='SS',
-             # linewidth=4,
-             # markerfacecolor='white',
-             # markeredgecolor='gray',
-             # markeredgewidth=2
-             )
-
-    # FF
-    plt.plot([float(i) for i in gain_x_ff[2:-1]], [float(i) for i in gain_y_ff[2:-1]],
-             '^-',  # fmt = '[marker][line][color]'
-             markersize=5,
-             color='#ff7f00',
-             label='FF',
-             # linewidth=4,
-             # markerfacecolor='white',
-             # markeredgecolor='gray',
-             # markeredgewidth=2
-             )
+    # # SS
+    # plt.plot([float(i) for i in gain_x_ss[2:-1]], [float(i) for i in gain_y_ss[2:-1]],
+    #          'o-',  # fmt = '[marker][line][color]'
+    #          markersize=5,
+    #          color='#4daf4a',
+    #          label='SS',
+    #          # linewidth=4,
+    #          # markerfacecolor='white',
+    #          # markeredgecolor='gray',
+    #          # markeredgewidth=2
+    #          )
+    #
+    # # FF
+    # plt.plot([float(i) for i in gain_x_ff[2:-1]], [float(i) for i in gain_y_ff[2:-1]],
+    #          '^-',  # fmt = '[marker][line][color]'
+    #          markersize=5,
+    #          color='#ff7f00',
+    #          label='FF',
+    #          # linewidth=4,
+    #          # markerfacecolor='white',
+    #          # markeredgecolor='gray',
+    #          # markeredgewidth=2
+    #          )
 
     # Add labels and title
-    ax.set_xlabel(r'频率 ($Hz$)')
-    ax.set_ylabel(r'增益 ($dB$)')
+    ax.set_xlabel(r'\textbf{频率} ($Hz$)')
+    ax.set_ylabel(r'噪声 ($dB$)')
     # ax.set_title('Scatter Plot of Data')
     plt.grid(visible=True, linestyle='--')
     ax.legend()
@@ -107,15 +107,15 @@ def gain_corner_plot(csv_file_name, img_file_name):
 
 
 if __name__ == '__main__':
-    # # CITA amp
-    # gain_corner_plot(csv_file_name=r'./data/ROIC512U30_2023AUT_CTIA_AMP_V2_sim_gain_corner.csv',
-    #                  img_file_name=r'./img/ROIC512U30_2023AUT_CTIA_AMP_V2_sim_gain_corner.pdf'
-    #                  )
+    # CITA amp
+    noise_plot(csv_file_name=r'./data/ROIC512U30_2023AUT_CTIA_AMP_V2_sim_noise_TT.csv',
+               img_file_name=r'./img/ROIC512U30_2023AUT_CTIA_AMP_V2_sim_noise_TT.pdf'
+               )
     # # COLUMN amp
     # gain_corner_plot(csv_file_name='./data/ROIC512U30_2023AUT_COLUMN_AMP_V2_sim_gain_corner.csv',
-    #                  img_file_name='./img/ROIC512U30_2023AUT_COLUMN_AMP_V2_sim_gain_corner.pdf'
+    #                  img_file_name='img/ROIC512U30_2023AUT_COLUMN_AMP_V2_sim_gain_corner.png'
     #                  )
-    # TERMINAL amp
-    gain_corner_plot(csv_file_name='./data/ROIC512U30_2023AUT_TERMINAL_AMP_V2_sim_gain_corner.csv',
-                     img_file_name='./img/ROIC512U30_2023AUT_TERMINAL_AMP_V2_sim_gain_corner.pdf'
-                     )
+    # # TERMINAL amp
+    # gain_corner_plot(csv_file_name='./data/ROIC512U30_2023AUT_TERMINAL_AMP_V2_sim_gain_corner.csv',
+    #                  img_file_name='img/ROIC512U30_2023AUT_TERMINAL_AMP_V2_sim_gain_corner.png'
+    #                  )
